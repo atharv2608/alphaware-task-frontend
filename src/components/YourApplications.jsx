@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from "react";
 import JobCard from "./JobCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "@/redux/jobSlice";
-import job from "@/api/Job";
 import SkeletonJobCard from "./SkeletonJobCard";
 function YourApplications() {
   const dispatch = useDispatch();
