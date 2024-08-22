@@ -48,6 +48,7 @@ function PostJob() {
     const success = await postJobService(data);
     if (success) {
       form.reset();
+      window.location.reload();
     }
     setLoading(false);
   };
