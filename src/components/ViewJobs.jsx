@@ -7,7 +7,12 @@ import SkeletonJobCard from "./SkeletonJobCard";
 function ViewJobs() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state?.auth?.userData?._id);
-
+  const role = useSelector((state) => state?.auth?.role);
+  useEffect(() => {
+    if (role !== "user") {
+      navigate("/", { replace: true });
+    }
+  }, [role]);
   useEffect(() => {
     dispatch(fetchJobs());
   }, [dispatch]);

@@ -6,23 +6,27 @@ import SkeletonJobCard from "./SkeletonJobCard";
 function YourApplications() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state?.auth?.userData?._id);
+  const role = useSelector((state) => state?.auth?.role);
+  useEffect(() => {
+    if (role !== "user") {
+      navigate("/", { replace: true });
+    }
+  }, [role]);
   useEffect(() => {
     dispatch(fetchJobs());
   }, [dispatch]);
 
   const jobs = useSelector((state) => state.job.jobs);
-  const filteredJobs = useMemo(()=> {
+  const filteredJobs = useMemo(() => {
     return jobs.filter((job) =>
       job.applications.some(
         (application) => String(application.applicantId) === String(userId)
       )
     );
-  }, [userId, jobs])
+  }, [userId, jobs]);
 
   const isLoading = useSelector((state) => state.job.isLoading);
   const error = useSelector((state) => state.job.error);
-
- 
 
   if (error) {
     return error;
