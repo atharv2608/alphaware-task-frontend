@@ -3,6 +3,7 @@ import JobCard from "./JobCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "@/redux/jobSlice";
 import { useNavigate } from "react-router-dom";
+import SkeletonJobCard from "./SkeletonJobCard";
 function ViewPostedJobs() {
   const dispatch = useDispatch();
 
@@ -21,10 +22,6 @@ const navigate = useNavigate()
   const jobs = useSelector((state) => state.job.jobs);
   const isLoading = useSelector((state) => state.job.isLoading);
   const error = useSelector((state) => state.job.error);
-  console.log(jobs.length)
-  if (isLoading) {
-    return "loading...";
-  }
 
   if (error) {
     return error;
@@ -37,7 +34,15 @@ const navigate = useNavigate()
           <h1 className="text-3xl text-indigo-500 lg:text-5xl font-bold text-center mb-10">
             Jobs Posted By You
           </h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+
+          {isLoading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+            <SkeletonJobCard />
+            <SkeletonJobCard />
+            <SkeletonJobCard />
+          </div>
+          ): (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
             {jobs.map((job, index) => (
               <JobCard
                 key={index}
@@ -49,6 +54,8 @@ const navigate = useNavigate()
               />
             ))}
           </div>
+          )}
+          
         </>
       ) : (
         <h1 className="text-3xl text-indigo-500 lg:text-5xl font-bold text-center mb-10">

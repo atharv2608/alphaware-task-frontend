@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 function App() {
   const loginStatus = useSelector(state => state.auth.status)
   const role = useSelector(state => state?.auth?.role)
-  console.log("Status: ", loginStatus);
   return (
     <>
       <div className="bg-gray-900 py-20 min-h-screen flex items-center ">

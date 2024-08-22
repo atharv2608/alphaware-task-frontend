@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { editJobService, postJobService } from "@/services/jobService";
+import { editJobService } from "@/services/jobService";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 function EditJob() {
@@ -27,6 +27,8 @@ function EditJob() {
   const job = useSelector((state) => state.job.jobs).filter(
     (job) => job?._id === id
   )[0];
+  const [loading, setLoading] = useState(false);
+
   const form = useForm({
     resolver: zodResolver(postJobSchema),
     defaultValues: {
@@ -38,13 +40,16 @@ function EditJob() {
   });
 
   const onSubmit = async (data) => {
-      const updateData = {
-          ...data,
-          jobId: id
-        }
+    setLoading(true)
+    const updateData = {
+      ...data,
+      jobId: id
+    }
     const success = await editJobService(updateData);
     if (success) {
+      //do something
     }
+    setLoading(true)
   };
 
   return (
@@ -132,8 +137,16 @@ function EditJob() {
             <Button
               type="submit"
               className="w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              disabled={loading}
             >
-              Edit Job
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Please wait
+                </>
+              ) : (
+                "Post Job"
+              )}
             </Button>
           </form>
         </Form>

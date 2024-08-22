@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 export const registerSchema = z.object({
-  firstName: z.string().min(2, { message: "First name is required" }),
-  lastName: z.string().min(2, { message: "Last name is required" }),
-  email: z.string().email({ message: "Invalid email" }),
+  firstName: z.string().min(1, { message: "First name is required" }),
+  lastName: z.string().min(1, { message: "Last name is required" }),
+  email: z.string().min(1, { message: "Email is required" }).email({ message: "Invalid email" }),
   phone: z.string()
     .length(10, { message: "Phone number should be exactly 10 digits" })
     .regex(/^\d{10}$/, { message: "Only numbers are allowed" }),

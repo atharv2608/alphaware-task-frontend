@@ -32,7 +32,6 @@ function JobCard({
     navigate(`view-applications/${id}`)
   }
   const onDeleteClick = async (id) => {
-    console.log(id);
     const confirmDelete = confirm("Are you sure you want to delete? ");
     if (confirmDelete) {
       const success = await deleteJobService(id);

@@ -11,7 +11,7 @@ const registerUserService = async(data)=>{
           }
     } catch (error) {
         console.error(error)
-        toast.error(error?.response?.data?.message || "Default Message");
+        toast.error(error?.response?.data?.message || "Something went wrong");
         return false;
     }
 }

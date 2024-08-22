@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -7,7 +7,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  FormControl
+  FormControl,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { postJobSchema } from "@/schemas/postJobSchema";
@@ -23,12 +23,13 @@ import { postJobService } from "@/services/jobService";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 function PostJob() {
-  const role  = useSelector(state => state.auth.role)
-const navigate = useNavigate()
-   useEffect(() => {
-    
-    if(role !== "admin"){
-        navigate("/", {replace: true})
+  const role = useSelector((state) => state.auth.role);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (role !== "admin") {
+      navigate("/", { replace: true });
     }
   }, [role]);
   const form = useForm({
@@ -42,16 +43,20 @@ const navigate = useNavigate()
   });
 
   const onSubmit = async (data) => {
-    const success = await postJobService(data)
-    if(success){
-      form.reset()
+    setLoading(true);
+    const success = await postJobService(data);
+    if (success) {
+      form.reset();
     }
+    setLoading(false);
   };
 
   return (
     <div className="bg-gray-800 min-h-screen flex items-center justify-center py-6 px-4">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-      <h1 className="text-indigo-500 text-2xl font-bold mb-6 text-center">Post a Job</h1>
+        <h1 className="text-indigo-500 text-2xl font-bold mb-6 text-center">
+          Post a Job
+        </h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="flex flex-col md:flex-row md:space-x-5">
@@ -131,8 +136,16 @@ const navigate = useNavigate()
             <Button
               type="submit"
               className="w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              disabled={loading}
             >
-              Post Job
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Please wait
+                </>
+              ) : (
+                "Post Job"
+              )}
             </Button>
           </form>
         </Form>

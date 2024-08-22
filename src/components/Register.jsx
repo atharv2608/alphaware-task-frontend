@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -14,10 +14,13 @@ import { Button } from "./ui/button";
 import { registerUserService } from "@/services/registerUser";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { Loader2 } from "lucide-react";
 
 function Register() {
   const authStatus = useSelector((state) => state.auth.status);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     if (authStatus) navigate("/", { replace: true });
   }, [authStatus]);
@@ -33,13 +36,13 @@ function Register() {
     },
   });
 
- 
-
-  const onSubmit = async (data) => { 
+  const onSubmit = async (data) => {
+    setLoading(true);
     const success = await registerUserService(data);
-    if(success){
-      form.reset()
+    if (success) {
+      form.reset();
     }
+    setLoading(false);
   };
 
   return (
@@ -131,7 +134,9 @@ function Register() {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-700">Confirm Password</FormLabel>
+                    <FormLabel className="text-gray-700">
+                      Confirm Password
+                    </FormLabel>
                     <Input
                       type="password"
                       {...field}
@@ -147,15 +152,22 @@ function Register() {
             <Button
               type="submit"
               className="w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-              
+              disabled={loading}
             >
-              Register
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Please wait
+                </>
+              ) : (
+                "Register"
+              )}
             </Button>
             <Link className="flex justify-center mt-5" to={"/login"}>
-            <span className="text-center text-blue-600 underline font-bold">
-              Already have an account? Login
-            </span>
-          </Link>
+              <span className="text-center text-blue-600 underline font-bold">
+                Already have an account? Login
+              </span>
+            </Link>
           </form>
         </Form>
       </div>
