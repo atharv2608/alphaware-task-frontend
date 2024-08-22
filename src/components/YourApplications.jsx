@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import JobCard from "./JobCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "@/redux/jobSlice";
@@ -12,11 +12,13 @@ function YourApplications() {
   }, [dispatch]);
 
   const jobs = useSelector((state) => state.job.jobs);
-  const filteredJobs = jobs.filter((job) =>
-    job.applications.some(
-      (application) => String(application.applicantId) === String(userId)
-    )
-  );
+  const filteredJobs = useMemo(()=> {
+    return jobs.filter((job) =>
+      job.applications.some(
+        (application) => String(application.applicantId) === String(userId)
+      )
+    );
+  }, [userId, jobs])
 
   const isLoading = useSelector((state) => state.job.isLoading);
   const error = useSelector((state) => state.job.error);

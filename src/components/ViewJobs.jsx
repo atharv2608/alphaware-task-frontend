@@ -1,29 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import JobCard from "./JobCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "@/redux/jobSlice";
-import job from "@/api/Job";
 import SkeletonJobCard from "./SkeletonJobCard";
+
 function ViewJobs() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state?.auth?.userData?._id);
+
   useEffect(() => {
     dispatch(fetchJobs());
   }, [dispatch]);
 
   const jobs = useSelector((state) => state.job.jobs);
-  const filteredJobs = jobs.filter(
-    (job) =>
-      !job.applications.some(
-        (application) => String(application.applicantId) === String(userId)
-      )
-  );
-
-  const isLoading =  useSelector((state) => state.job.isLoading);
+  const isLoading = useSelector((state) => state.job.isLoading);
   const error = useSelector((state) => state.job.error);
 
+  const filteredJobs = useMemo(() => {
+    return jobs.filter(
+      (job) =>
+        !job.applications.some(
+          (application) => String(application.applicantId) === String(userId)
+        )
+    );
+  }, [jobs, userId]);
+
   if (error) {
-    return error;
+    return <div className="text-red-500">Error: {error}</div>;
   }
 
   return (
@@ -34,11 +37,11 @@ function ViewJobs() {
             Explore Jobs
           </h1>
           {isLoading ? (
-           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-           <SkeletonJobCard />
-           <SkeletonJobCard />
-           <SkeletonJobCard />
-         </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+              <SkeletonJobCard />
+              <SkeletonJobCard />
+              <SkeletonJobCard />
+            </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
               {filteredJobs.map((job, index) => (
