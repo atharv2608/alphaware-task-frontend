@@ -22,6 +22,7 @@ import {
 import { postJobService } from "@/services/jobService";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Loader2 } from "lucide-react";
 function PostJob() {
   const role = useSelector((state) => state.auth.role);
   const navigate = useNavigate();
