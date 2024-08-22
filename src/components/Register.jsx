@@ -41,6 +41,7 @@ function Register() {
     const success = await registerUserService(data);
     if (success) {
       form.reset();
+      navigate("/login", {replace: true})
     }
     setLoading(false);
   };
