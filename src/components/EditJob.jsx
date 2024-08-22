@@ -22,6 +22,7 @@ import {
 import { editJobService } from "@/services/jobService";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Loader2 } from "lucide-react";
 function EditJob() {
   const { id } = useParams();
   const job = useSelector((state) => state.job.jobs).filter(
