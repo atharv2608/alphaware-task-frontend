@@ -45,7 +45,7 @@ function App() {
           <Route element={<ProtectedLayout />}>
             <Route path="panel">
               <Route path="admin">
-                <Route path="post-job" element={<PostJob />} role={role} />
+                <Route path="post-job" element={<PostJob role={role}/>}  />
 
                 <Route path="view-jobs">
                   <Route path="" element={<ViewPostedJobs role={role} />} />
