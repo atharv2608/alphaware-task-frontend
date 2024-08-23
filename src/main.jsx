@@ -14,12 +14,12 @@ import Register from "./components/Register.jsx";
 import Login from "./components/Login.jsx";
 import Layout from "./Layout.jsx";
 import ProtectedLayout from "./auth/ProtectedLayout.jsx";
-import PostJob from "./components/PostJob.jsx";
-import ViewPostedJobs from "./components/ViewPostedJobs.jsx";
-import EditJob from "./components/EditJob.jsx";
-import ViewJobs from "./components/ViewJobs.jsx";
-import YourApplications from "./components/YourApplications.jsx";
-import ViewApplications from "./components/ViewApplications.jsx";
+import PostJob from "./components/admin-panel/PostJob.jsx";
+import ViewPostedJobs from "./components/admin-panel/ViewPostedJobs.jsx";
+import ViewApplications from "./components/admin-panel/ViewApplications.jsx";
+import EditJob from "./components/admin-panel/EditJob.jsx";
+import ViewJobs from "./components/user-panel/ViewJobs.jsx";
+import YourApplications from "./components/user-panel/YourApplications.jsx";
 
 let persistor = persistStore(store);
 const router = (
