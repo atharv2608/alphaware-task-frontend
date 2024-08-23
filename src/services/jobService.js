@@ -1,5 +1,10 @@
 import job from "@/api/Job";
 import { toast } from "react-toastify";
+
+//based on the job class in api folder, I am calling its methods by passing relevant data
+//These all are like factroy functions, also handling error
+
+//service to post job
 const postJobService = async(data)=>{
     try {
         const res = await job.postJob(data);
@@ -14,7 +19,7 @@ const postJobService = async(data)=>{
     }
 }
 
-
+//service to edit job
 const editJobService = async(data)=>{
     try {
         const res = await job.editJob(data);
@@ -28,6 +33,8 @@ const editJobService = async(data)=>{
         return false;
     }
 }
+
+//service to delete job
 const deleteJobService = async(data)=>{
     try {
         const res = await job.deleteJob(data);
@@ -41,6 +48,9 @@ const deleteJobService = async(data)=>{
         return false;
     }
 }
+
+//service to apply to job
+
 const applyJobService = async(data)=>{
     try {
         const res = await job.applyJob(data);

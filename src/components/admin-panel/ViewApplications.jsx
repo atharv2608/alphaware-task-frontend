@@ -22,15 +22,22 @@ function ViewApplications({ role }) {
     }
   }, [role]);
   const dispatch = useDispatch();
+
+  //async data fetching via thunk
   useEffect(() => {
     dispatch(fetchJobs());
   }, []);
+
+  //job id from params
   const { jobId } = useParams();
+
+  //getting all applications
   const job = useSelector((state) => state.job.jobs).filter(
     (job) => job?._id === jobId
   )[0];
   const applications = job.applications;
 
+  //to format date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-GB"); // 'en-GB' gives the format dd/mm/yyyy

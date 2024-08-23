@@ -23,12 +23,15 @@ function App() {
   const role = useSelector((state) => state.auth?.role);
   const router = (
     <>
+      //Toast container to show messages
       <ToastContainer
         autoClose={1500}
         pauseOnFocusLoss={false}
         limit={2}
         pauseOnHover={false}
       />
+
+      //simple browser router
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout loginStatus={loginStatus} />}>

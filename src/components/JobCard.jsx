@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { applyJobService, deleteJobService } from "@/services/jobService";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "@/redux/jobSlice";
+
+//basic job card from shadcn
 function JobCard({
   id,
   companyName = "Company Name",

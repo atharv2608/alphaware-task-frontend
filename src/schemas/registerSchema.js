@@ -1,5 +1,5 @@
 import { z } from "zod";
-
+// validation for registering new user using zod
 export const registerSchema = z.object({
   firstName: z.string().min(1, { message: "First name is required" }),
   lastName: z.string().min(1, { message: "Last name is required" }),

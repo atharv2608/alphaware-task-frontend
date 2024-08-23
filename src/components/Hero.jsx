@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useScrollToTop } from "@/utils/scrollToTop";
 function Hero() {
   useScrollToTop()
+  //check login status and role for conditional rendering
   const loginStatus = useSelector(state => state.auth.status)
   const role = useSelector(state => state?.auth?.role)
   return (

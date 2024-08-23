@@ -7,11 +7,15 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
 function Navbar() {
+  //check login status and role for conditional rendering
   const loginStatus = useSelector((state) => state?.auth?.status);
   const role = useSelector((state) => state?.auth?.userData?.role);
+  
   const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
 
+
+  //on logout click dispatching logout
   const onLogout = () => {
     Cookies.remove("accessToken");
     dispatch(logout());

@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-
+//Skeleton component to show while fetching data
 function SkeletonJobCard() {
   return (
     <Card className="w-[380px]">

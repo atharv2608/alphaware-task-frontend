@@ -27,13 +27,19 @@ import { useScrollToTop } from "@/utils/scrollToTop";
 function EditJob({role}) {
   useScrollToTop()
   const navigate = useNavigate()
+
+  //Navigating to home if user is not admin
    useEffect(() => {
     
     if(role !== "admin"){
         navigate("/", {replace: true})
     }
   }, [role]);
+
+  //extracting job id from params
   const { id } = useParams();
+
+  //filtering from jobs list
   const job = useSelector((state) => state.job.jobs).filter(
     (job) => job?._id === id
   )[0];

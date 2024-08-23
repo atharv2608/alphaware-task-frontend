@@ -3,6 +3,10 @@ import user from "@/api/User"
 import { toast } from "react-toastify"
 import { login as authLogin } from "@/auth/authSlice";
 import Cookies from "js-cookie";
+
+//similar to job service. Calling methods from user class from api folder
+
+// service to login user
 const loginUserService = async(data, dispatch)=>{
     
     try {

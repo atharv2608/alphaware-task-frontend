@@ -1,21 +1,27 @@
 import { getAccessToken } from "@/auth/getAccessToken";
 import axios from "axios";
 
+// Define the Job class, which contains methods for interacting with job-related API endpoints
 export class Job{
+
+      // Method to post a new job
     async postJob(data){
-        const accessToken = getAccessToken();
+        const accessToken = getAccessToken(); // Get the access token for authorization
         let configuration = {
-            method: "post",
-            maxBodyLength: Infinity,
+            method: "post", // HTTP POST method
+            maxBodyLength: Infinity,  // Set the maximum request body length to infinity to handle large data (not recommended)
             url: `${import.meta.env.VITE_API_URL}/jobs/post`,
             headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${accessToken}`,
+                "Content-Type": "application/json", // Set the content type to JSON
+                Authorization: `Bearer ${accessToken}`, // Include the access token in the Authorization header
             },
-            data: data,
+            data: data, // Job data to be sent in the request body
           };
-        return axios.request(configuration);
+        return axios.request(configuration); // Make the API request with the specified configuration
     }
+
+
+    //Similar to above method, below methods are implememted same
     async editJob(data){
         const accessToken = getAccessToken();
         let configuration = {

@@ -9,16 +9,21 @@ function ViewPostedJobs({ role }) {
   useScrollToTop()
   const dispatch = useDispatch();
 
+  //async data fetching via thunk
   useEffect(() => {
     dispatch(fetchJobs());
   }, [dispatch]);
 
+
+  //role checking
   const navigate = useNavigate();
   useEffect(() => {
     if (role !== "admin") {
       navigate("/", { replace: true });
     }
   }, [role]);
+
+  //extracting data from store
   const jobs = useSelector((state) => state.job.jobs);
   const isLoading = useSelector((state) => state.job.isLoading);
   const error = useSelector((state) => state.job.error);

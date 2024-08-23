@@ -1,6 +1,8 @@
 
 import user from "@/api/User"
 import { toast } from "react-toastify"
+
+//service to regitser user
 const registerUserService = async(data)=>{
     
     try {

@@ -18,6 +18,8 @@ function YourApplications({role}) {
   }, [dispatch]);
 
   const jobs = useSelector((state) => state.job.jobs);
+
+  //Showing only those jobs  applied by user. Using usememo for optimisation
   const filteredJobs = useMemo(() => {
     return jobs.filter((job) =>
       job.applications.some(

@@ -20,6 +20,8 @@ function Login({loginStatus}) {
   useScrollToTop()
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  
+  //navigating to home if already logged in
   useEffect(() => {
     if (loginStatus) navigate("/", { replace: true });
   }, [loginStatus]);

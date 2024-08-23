@@ -28,11 +28,14 @@ function PostJob({role}) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
+  //role checking
   useEffect(() => {
     if (role !== "admin") {
       navigate("/", { replace: true });
     }
   }, [role]);
+
+  //using react hook form along with shadcn form controls and zod for validations 
   const form = useForm({
     resolver: zodResolver(postJobSchema),
     defaultValues: {

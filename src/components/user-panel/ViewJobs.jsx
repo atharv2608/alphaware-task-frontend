@@ -8,11 +8,13 @@ import SearchFilter from "../SearchFilter";
 
 function ViewJobs({ role }) {
   useScrollToTop();
-  const [companyNameFilter, setCompanyNameFilter] = useState("");
-  console.log("Company: ", companyNameFilter);
 
+  //filters
+  const [companyNameFilter, setCompanyNameFilter] = useState("");
   const [contractFilter, setContractFilter] = useState("");
+
   const dispatch = useDispatch();
+  //data extraction
   const userId = useSelector((state) => state?.auth?.userData?._id);
   const jobs = useSelector((state) => state.job.jobs);
   const isLoading = useSelector((state) => state.job.isLoading);
@@ -22,10 +24,14 @@ function ViewJobs({ role }) {
       navigate("/", { replace: true });
     }
   }, [role]);
+
+  //async data fetching
   useEffect(() => {
     dispatch(fetchJobs());
   }, [dispatch]);
 
+
+  //Showing only those jobs not applied by user. Using usememo for optimisation
   const filteredJobs = useMemo(() => {
     return jobs
       .filter(
