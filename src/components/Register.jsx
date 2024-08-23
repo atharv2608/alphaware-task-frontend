@@ -12,18 +12,17 @@ import { Input } from "@/components/ui/input";
 import { registerSchema } from "@/schemas/registerSchema";
 import { Button } from "./ui/button";
 import { registerUserService } from "@/services/registerUser";
-import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 
-function Register() {
-  const authStatus = useSelector((state) => state.auth.status);
+function Register({loginStatus}) {
+  
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (authStatus) navigate("/", { replace: true });
-  }, [authStatus]);
+    if (loginStatus) navigate("/", { replace: true });
+  }, [loginStatus]);
   const form = useForm({
     resolver: zodResolver(registerSchema),
     defaultValues: {

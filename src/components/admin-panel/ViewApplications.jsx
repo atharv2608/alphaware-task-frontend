@@ -12,13 +12,11 @@ import {
 } from "@/components/ui/table";
 import { fetchJobs } from "@/redux/jobSlice";
 import { useDispatch } from "react-redux";
-function ViewApplications() {
-const role  = useSelector(state => state.auth.role)
-const navigate = useNavigate()
-   useEffect(() => {
-    
-    if(role !== "admin"){
-        navigate("/", {replace: true})
+function ViewApplications({ role }) {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (role !== "admin") {
+      navigate("/", { replace: true });
     }
   }, [role]);
   const dispatch = useDispatch();

@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "@/redux/jobSlice";
 import SkeletonJobCard from "../SkeletonJobCard";
 
-function ViewJobs() {
+function ViewJobs({role}) {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state?.auth?.userData?._id);
-  const role = useSelector((state) => state?.auth?.role);
   useEffect(() => {
     if (role !== "user") {
       navigate("/", { replace: true });

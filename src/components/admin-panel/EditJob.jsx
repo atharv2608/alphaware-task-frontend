@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -21,9 +21,16 @@ import {
 } from "@/components/ui/select";
 import { editJobService } from "@/services/jobService";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
-function EditJob() {
+function EditJob({role}) {
+  const navigate = useNavigate()
+   useEffect(() => {
+    
+    if(role !== "admin"){
+        navigate("/", {replace: true})
+    }
+  }, [role]);
   const { id } = useParams();
   const job = useSelector((state) => state.job.jobs).filter(
     (job) => job?._id === id

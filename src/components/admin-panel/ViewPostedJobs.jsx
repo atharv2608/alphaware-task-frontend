@@ -4,14 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "@/redux/jobSlice";
 import { useNavigate } from "react-router-dom";
 import SkeletonJobCard from "../SkeletonJobCard";
-function ViewPostedJobs() {
+function ViewPostedJobs({role}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchJobs());
   }, [dispatch]);
 
-  const role  = useSelector(state => state.auth.role)
 const navigate = useNavigate()
    useEffect(() => {
     
