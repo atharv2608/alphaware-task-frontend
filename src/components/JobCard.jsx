@@ -10,10 +10,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { applyJobService, deleteJobService } from "@/services/jobService";
+import { deleteJobService } from "@/services/jobService";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "@/redux/jobSlice";
 
+import { ApplyDialog } from "./ApplyDialog";
 //basic job card from shadcn
 function JobCard({
   id,
@@ -21,7 +22,7 @@ function JobCard({
   position = "Position",
   contract = "Contract",
   location = "Location",
-  showButton = true
+  showButton = true,
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,29 +32,20 @@ function JobCard({
   };
 
   const onViewApplicationsClick = (id) => {
-    navigate(`view-applications/${id}`)
-  }
+    navigate(`view-applications/${id}`);
+  };
   const onDeleteClick = async (id) => {
     const confirmDelete = confirm("Are you sure you want to delete? ");
     if (confirmDelete) {
       const success = await deleteJobService(id);
       if (success) {
         dispatch(fetchJobs());
-      } 
+      }
     } else {
       return;
     }
   };
 
-  const onApplyClick = async(jobId) =>{
-    const confirmApply = confirm("Do you really wish to apply?")
-    if(confirmApply){
-      const success = await applyJobService(jobId)
-      if(success){
-        dispatch(fetchJobs());
-      }
-    }
-  }
   return (
     <Card className={cn("w-[380px]")}>
       <CardHeader>
@@ -82,10 +74,15 @@ function JobCard({
               </Button>
             </>
           )}
-          {(role === "user" && showButton) && (
+          {role === "user" && showButton && (
             <>
-              <Button onClick={() => onApplyClick(id)}>Apply</Button>
-              
+              <ApplyDialog
+                comapanyName={companyName}
+                position={position}
+                jobID={id}
+                dispatch={dispatch}
+                fetchJobs={fetchJobs}
+              />
             </>
           )}
         </div>

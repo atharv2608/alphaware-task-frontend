@@ -53,10 +53,11 @@ export class Job{
           };
         return axios.request(configuration);
     }
-    async applyJob(jobId){
+    async applyJob({jobId, resumeURL}){
         const accessToken = getAccessToken();
         const data = JSON.stringify({
-          jobId: jobId
+          jobId: jobId,
+          resumeURL: resumeURL
         })
         let configuration = {
             method: "post",
