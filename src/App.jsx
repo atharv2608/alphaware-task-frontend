@@ -17,6 +17,7 @@ import ViewApplications from "./components/admin-panel/ViewApplications";
 import ViewJobs from "./components/user-panel/ViewJobs";
 import YourApplications from "./components/user-panel/YourApplications";
 import { useSelector } from "react-redux";
+import NotFound from "./components/NotFound";
 
 function App() {
   const loginStatus = useSelector((state) => state.auth.status);
@@ -63,6 +64,7 @@ function App() {
               </Route>
             </Route>
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>
