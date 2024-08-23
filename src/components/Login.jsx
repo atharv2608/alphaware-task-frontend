@@ -15,7 +15,9 @@ import { loginUserService } from "@/services/loginService";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
+import { useScrollToTop } from "@/utils/scrollToTop";
 function Login({loginStatus}) {
+  useScrollToTop()
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   useEffect(() => {

@@ -12,7 +12,9 @@ import {
 } from "@/components/ui/table";
 import { fetchJobs } from "@/redux/jobSlice";
 import { useDispatch } from "react-redux";
+import { useScrollToTop } from "@/utils/scrollToTop";
 function ViewApplications({ role }) {
+  useScrollToTop()
   const navigate = useNavigate();
   useEffect(() => {
     if (role !== "admin") {

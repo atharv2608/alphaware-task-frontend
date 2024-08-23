@@ -14,9 +14,10 @@ import { Button } from "./ui/button";
 import { registerUserService } from "@/services/registerUser";
 import { Link, useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
+import { useScrollToTop } from "@/utils/scrollToTop";
 
 function Register({loginStatus}) {
-  
+  useScrollToTop()
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 

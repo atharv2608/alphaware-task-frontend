@@ -1,7 +1,9 @@
 import heroImage from "../images/hero-img.png"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useScrollToTop } from "@/utils/scrollToTop";
 function Hero() {
+  useScrollToTop()
   const loginStatus = useSelector(state => state.auth.status)
   const role = useSelector(state => state?.auth?.role)
   return (

@@ -23,7 +23,9 @@ import { editJobService } from "@/services/jobService";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
+import { useScrollToTop } from "@/utils/scrollToTop";
 function EditJob({role}) {
+  useScrollToTop()
   const navigate = useNavigate()
    useEffect(() => {
     

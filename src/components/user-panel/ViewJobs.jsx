@@ -3,8 +3,10 @@ import JobCard from "../JobCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobs } from "@/redux/jobSlice";
 import SkeletonJobCard from "../SkeletonJobCard";
+import { useScrollToTop } from "@/utils/scrollToTop";
 
 function ViewJobs({role}) {
+  useScrollToTop()
   const dispatch = useDispatch();
   const userId = useSelector((state) => state?.auth?.userData?._id);
   useEffect(() => {

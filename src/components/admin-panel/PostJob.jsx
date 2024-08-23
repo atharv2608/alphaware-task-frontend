@@ -22,7 +22,9 @@ import {
 import { postJobService } from "@/services/jobService";
 import { useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
+import { useScrollToTop } from "@/utils/scrollToTop";
 function PostJob({role}) {
+  useScrollToTop()
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
