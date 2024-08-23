@@ -1,4 +1,3 @@
-
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
@@ -41,22 +40,19 @@ const router = (
           <Route path="panel">
             <Route path="admin">
               <Route path="post-job" element={<PostJob />} />
-              <Route
-                path="view-jobs"
-                element={<ViewPostedJobs />}
-              />
-              <Route
-                path="view-jobs/edit/:id"
-                element={<EditJob />}
-              />
-              <Route
-                path="view-jobs/view-applications/:jobId"
-                element={<ViewApplications />}
-              />
+
+              <Route path="view-jobs">
+                <Route path="" element={<ViewPostedJobs />} />
+                <Route path="edit/:id" element={<EditJob />} />
+                <Route
+                  path="view-applications/:jobId"
+                  element={<ViewApplications />}
+                />
+              </Route>
             </Route>
             <Route path="user">
-              <Route path="view-jobs"  element={<ViewJobs />}/>
-              <Route path="applied-jobs"  element={<YourApplications />}/>
+              <Route path="view-jobs" element={<ViewJobs />} />
+              <Route path="applied-jobs" element={<YourApplications />} />
             </Route>
           </Route>
         </Route>

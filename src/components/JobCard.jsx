@@ -25,7 +25,7 @@ function JobCard({
   const dispatch = useDispatch();
   const role = useSelector((state) => state?.auth?.userData?.role);
   const onEditClick = (id) => {
-    navigate(`edit/${id}`, { replace: true });
+    navigate(`edit/${id}`);
   };
 
   const onViewApplicationsClick = (id) => {
